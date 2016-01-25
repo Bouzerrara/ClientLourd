@@ -114,8 +114,8 @@ CREATE TABLE [dbo].[Offer](
 	[City] [nvarchar](100) NOT NULL,
 	[ZipCode] [nvarchar](50) NOT NULL,
 	[IdTypeOfContrat] [bigint] NOT NULL,
-	[IdJobDomain] [bigint] NOT NULL,
 	[IdJob] [bigint] NOT NULL,
+	[IdClient] [bigint] NOT NULL,
  CONSTRAINT [PK_Offer] PRIMARY KEY CLUSTERED 
 (
 	[Identifier] ASC
@@ -131,17 +131,17 @@ GO
 ALTER TABLE [dbo].[Offer] CHECK CONSTRAINT [FK_Offer_Job]
 GO
 
-ALTER TABLE [dbo].[Offer]  WITH CHECK ADD  CONSTRAINT [FK_Offer_JobDomain] FOREIGN KEY([IdJobDomain])
-REFERENCES [dbo].[JobDomain] ([Identifier])
-GO
-
-ALTER TABLE [dbo].[Offer] CHECK CONSTRAINT [FK_Offer_JobDomain]
-GO
-
 ALTER TABLE [dbo].[Offer]  WITH CHECK ADD  CONSTRAINT [FK_Offer_TypeOfContract] FOREIGN KEY([IdTypeOfContrat])
 REFERENCES [dbo].[TypeOfContract] ([Identifier])
 GO
 
 ALTER TABLE [dbo].[Offer] CHECK CONSTRAINT [FK_Offer_TypeOfContract]
+GO
+
+ALTER TABLE [dbo].[Offer]  WITH CHECK ADD  CONSTRAINT [FK_Offer_Client] FOREIGN KEY(IdClient)
+REFERENCES [dbo].Client ([Identifier])
+GO
+
+ALTER TABLE [dbo].[Offer] CHECK CONSTRAINT [FK_Offer_Client]
 GO
 
